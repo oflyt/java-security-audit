@@ -9,23 +9,24 @@ import static spark.Spark.post;
 
 import org.slf4j.MDC;
 
+import io.meterian.samples.jackson.logging.CommunicationLogger;
 import io.meterian.samples.jackson.product.ProductApi;
-import io.meterian.samples.jackson.security.AuditLogger;
- 
+
 public class Main {
-  
+
 	private static final int HTTP_PORT = 8888;
- 
-    public static void main(String[] args) {
+
+	public static void main(String[] args) {
     	path("/products", () -> {
     		port(HTTP_PORT);
+    		
     		before("", (req, resp) -> MDC.put("sessionId", req.session().id()));
-    		before("", AuditLogger::mdcBefore);
+    		before("", CommunicationLogger::before);
     		
     		get("", ProductApi::getProducts);
     		post("", ProductApi::addProduct);
     		
-    		after("", AuditLogger::mdcAfter);
+    		after("", CommunicationLogger::after);
     		after("", (req, resp) -> MDC.clear());
     	});
     }

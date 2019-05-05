@@ -7,6 +7,20 @@
 			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>%-2(%d{yyyy-MM-dd HH:mm:ss.SSS}) %level %class{32} [%X{sessionId}] %msg %n</pattern>
 		</encoder>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>AUDIT</marker>
+			</evaluator>
+			<onMismatch>NEUTRAL</onMismatch>
+			<onMatch>DENY</onMatch>
+		</filter>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>STACKTRACE</marker>
+			</evaluator>
+			<onMismatch>NEUTRAL</onMismatch>
+			<onMatch>DENY</onMatch>
+		</filter>
 	</appender>
 
 	<appender name="audit.appender"
@@ -16,13 +30,36 @@
 			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>%-2(%d{yyyy-MM-dd HH:mm:ss.SSS}) %level %class{32} [%X{sessionId}] %msg %n</pattern>
 		</encoder>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>AUDIT</marker>
+			</evaluator>
+			<onMismatch>DENY</onMismatch>
+			<onMatch>ACCEPT</onMatch>
+		</filter>
+	</appender>
+	
+	<appender name="stacktrace.appender"
+		class="ch.qos.logback.core.FileAppender">
+		<file>stacktrace.log</file>
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%-2(%d{yyyy-MM-dd HH:mm:ss.SSS}) %level %class{32} [%X{sessionId}] %msg %n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>STACKTRACE</marker>
+			</evaluator>
+			<onMismatch>DENY</onMismatch>
+			<onMatch>ACCEPT</onMatch>
+		</filter>
 	</appender>
 
-	<!-- general config -->
 	<logger name="org.eclipse" level="ERROR" />
 	
-	<logger name="io.meterian.samples.jackson.security.AuditLogger" level="TRACE" additivity="false">
+	<logger name="io.meterian.samples.jackson" level="TRACE" additvity="false">
 		<appender-ref ref="audit.appender" />
+		<appender-ref ref="stacktrace.appender" />
 	</logger>
 
 	<root level="INFO">
