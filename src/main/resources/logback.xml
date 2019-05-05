@@ -1,0 +1,32 @@
+<configuration scan="true" scanPeriod="10 seconds">
+
+	<!-- main logger -->
+	<appender name="main.appender"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%-2(%d{yyyy-MM-dd HH:mm:ss.SSS}) %level %class{32} [%X{sessionId}] %msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="audit.appender"
+		class="ch.qos.logback.core.FileAppender">
+		<file>vulnerability-audit.log</file>
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%-2(%d{yyyy-MM-dd HH:mm:ss.SSS}) %level %class{32} [%X{sessionId}] %msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- general config -->
+	<logger name="org.eclipse" level="ERROR" />
+	
+	<logger name="io.meterian.samples.jackson.security.AuditLogger" level="TRACE" additivity="false">
+		<appender-ref ref="audit.appender" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="main.appender" />
+	</root>
+
+</configuration>
