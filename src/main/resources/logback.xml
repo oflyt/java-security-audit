@@ -25,7 +25,7 @@
 
 	<appender name="audit.appender"
 		class="ch.qos.logback.core.FileAppender">
-		<file>vulnerability-audit.log</file>
+		<file>logs/vulnerability-audit.log</file>
 		<encoder
 			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>%-2(%d{yyyy-MM-dd HH:mm:ss.SSS}) %level %class{32} [%X{sessionId}] %msg %n</pattern>
@@ -41,7 +41,7 @@
 	
 	<appender name="stacktrace.appender"
 		class="ch.qos.logback.core.FileAppender">
-		<file>stacktrace.log</file>
+		<file>logs/stacktrace.log</file>
 		<encoder
 			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>%-2(%d{yyyy-MM-dd HH:mm:ss.SSS}) %level %class{32} [%X{sessionId}] %msg %n</pattern>
