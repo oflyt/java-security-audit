@@ -19,8 +19,10 @@ public class CommunicationLogger {
 	}
 
 	public static void before(Request request, Response response) {
-		LOGGER.info("{} {}", request.requestMethod(), request.pathInfo());
-		if(LOGGER.isDebugEnabled()) {			
+		if(LOGGER.isInfoEnabled()) {
+			LOGGER.info("{} {}", request.requestMethod(), request.pathInfo());
+		} 
+		if (LOGGER.isDebugEnabled()) {			
 			Session session = request.session();
 			LOGGER.debug(LogMarkers.AUDIT, "Request session creation time: {}", session.creationTime());
 			LOGGER.debug(LogMarkers.AUDIT, "Request ip: {}", request.ip());
@@ -32,8 +34,10 @@ public class CommunicationLogger {
 
     
     public static void after(Request request, Response response) {
+    	if(LOGGER.isInfoEnabled()) {
+			LOGGER.info("Response code: {}", response.status());
+		} 
     	if(LOGGER.isDebugEnabled()) {			
-			LOGGER.debug(LogMarkers.AUDIT, "Response code: {}", response.status());
 			LOGGER.debug(LogMarkers.AUDIT, "Response body: {}", response.body());
 		}
     }

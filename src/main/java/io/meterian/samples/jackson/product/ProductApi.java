@@ -2,16 +2,11 @@ package io.meterian.samples.jackson.product;
 
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import spark.Request;
 import spark.Response;
 
 public class ProductApi {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProductApi.class);
-
 	private static final int HTTP_CODE_ACCEPTED = 201;
 	private static final int HTTP_CODE_BAD_REQUEST = 400;
     
@@ -35,7 +30,6 @@ public class ProductApi {
 
 	public static String getProducts(Request request, Response response) {
 		Collection<Product> res = products.list();
-		LOGGER.info("/products -> {}", res);
 		return ProductSerdes.serialize(res);
 	}
 	
