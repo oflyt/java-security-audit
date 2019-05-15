@@ -32,7 +32,6 @@ public class CommunicationLogger {
 		}
     }
 
-    
     public static void after(Request request, Response response) {
     	if(LOGGER.isInfoEnabled()) {
 			LOGGER.info("Response code: {}", response.status());
