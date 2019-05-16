@@ -8,7 +8,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
@@ -23,9 +22,6 @@ public class Authenticator {
 			"justanotheradmin",
 			"heythere"
 			);
-//	.stream()
-//	.map(token -> token.getBytes(StandardCharsets.UTF_8))
-//	.collect(Collectors.toList());
 	
 	private Authenticator() {
 		// Hide constructor
@@ -54,12 +50,6 @@ public class Authenticator {
 		}
 		LOGGER.warn("Unathorized user");
 		Spark.halt(UNATHORIZED_HTTP_CODE, "User unathorized");
-	}
-	
-	public static void main(String[] args) {
-		byte[] tokenBytes = "iamvalid".getBytes(StandardCharsets.UTF_8);
-		byte[] encoded = Base64.getEncoder().encode(tokenBytes);
-		System.out.println(new String(encoded, StandardCharsets.UTF_8));
 	}
 	
 }
