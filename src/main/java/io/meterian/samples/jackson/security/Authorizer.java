@@ -12,9 +12,9 @@ import spark.Request;
 import spark.Response;
 import spark.Spark;
 
-public class Authenticator {
+public class Authorizer {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(Authenticator.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Authorizer.class);
 	private static final int UNATHORIZED_HTTP_CODE = 401;
 	private static final List<String> VALID_TOKENS = Arrays.asList(
 			"iamvalid",
@@ -23,7 +23,7 @@ public class Authenticator {
 			"heythere"
 			);
 	
-	private Authenticator() {
+	private Authorizer() {
 		// Hide constructor
 	}
 

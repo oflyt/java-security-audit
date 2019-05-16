@@ -11,7 +11,7 @@ import org.slf4j.MDC;
 
 import io.meterian.samples.jackson.logging.CommunicationLogger;
 import io.meterian.samples.jackson.product.ProductApi;
-import io.meterian.samples.jackson.security.Authenticator;
+import io.meterian.samples.jackson.security.Authorizer;
 
 public class Main {
 
@@ -23,7 +23,7 @@ public class Main {
     		
     		before("", (req, resp) -> MDC.put("sessionId", req.session().id()));
     		before("", CommunicationLogger::before);
-    		before("", Authenticator::authorize);
+    		before("", Authorizer::authorize);
     		
     		get("", ProductApi::getProducts);
     		post("", ProductApi::addProduct);
