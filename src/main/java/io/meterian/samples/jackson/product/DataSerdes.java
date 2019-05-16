@@ -37,7 +37,8 @@ public class DataSerdes {
             LOGGER.warn("Unable to deserialize data");
             LOGGER.warn(LogMarkers.STACKTRACE, "Unable to deserialize data", e);
 		} catch (ClassNotFoundException e) {
-			// TODO ADD HANDLING HERE
+			LOGGER.warn("Unable to find class");
+			LOGGER.warn(LogMarkers.STACKTRACE, "Unable to find class", e);
 		}
         return null;
     }

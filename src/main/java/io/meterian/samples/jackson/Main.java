@@ -27,6 +27,7 @@ public class Main {
     		
     		get("", ProductApi::getProducts);
     		post("", ProductApi::addProduct);
+    		post("/:id", ProductApi::updateData);
     		
     		after("", CommunicationLogger::after);
     		after("", (req, resp) -> MDC.clear());
