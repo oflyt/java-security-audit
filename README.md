@@ -1,17 +1,31 @@
-[![security status](https://qa.meterian.com/badge/gh/bbossola/vulnerability-java-samples/security)](https://qa.meterian.com/report/gh/bbossola/vulnerability-java-samples)
-[![stability status](https://qa.meterian.com/badge/gh/bbossola/vulnerability-java-samples/stability)](https://qa.meterian.com/report/gh/bbossola/vulnerability-java-samples) 
-_(hey, the low security is intentional here!)_
+# Overview 
+A copy of [vulnerability-java-samples](https://github.com/bbossola/vulnerability-java-samples) with some restructuring and added logging. 
 
-Sample exploits of common vulnerabilities in Java librarires. Please go to [my blog](https://bbossola.wordpress.com/2018/04/14/remotely-execute-java-code-using-json/) for a detailed explanation!
+## How to run
+> `mvn clean install`  
+> `java -jar target/jackson-exploit-1.0-SNAPSHOT.jar`  
 
-## how to use this?
-You can compile the code using Maven, standard structure: in the `/target` subfolder you will get an executable jar that will run the exploitable server. 
+## Requests
+> `cd curls`  
+> `./list.sh`  
+> `./add.sh`  
+> `./exploit.sh`  
 
-The exploit class is availabile in the `/exploit` subfolder, you can find there the exploit itself (unsurprisingly named Exploit.java) and a super simple Encoder class, that will encode the Exploit code in base64 to be included in the JSON
+## Logging
+The logging has been split up into three logs, main log, vulnerability log and stack trace log. That means that they can be distributed differently and permissions can be handled separately. 
 
-In the `/curls` folder you will find sample curls to invoke the `list` and `add` REST API, plus the `exploit.sh` and the `exploit.json` file.
+### MDC
+Session ID is added to the MDC and then also added to all the logging in the app. 
 
-Please enjoy and be wary that all these information are publicly available on the internet. This is just a summary post from a cybersecurity practitioner and nothing else. The code provided is for research purposes only.
+### Main log
+The main log will contain basic information about what is happening in the app. 
+
+### Vulnerability audit log
+The vulnerability audit log contain information from every request, such as IP of requester, headers, cookies, and body. It also contains information about the response but then only the status code and body. Since this log might contain sensitive information it is good to have it separate from the main log. 
+
+### Stack trace log
+The stack trace log contains the stack traces when something has gone wrong in the application, this is mainly to keep the main log clean. 
 
 ## credits
-https://github.com/mbechler/marshalsec
+https://github.com/bbossola/vulnerability-java-samples  
+https://bbossola.wordpress.com/2018/04/14/remotely-execute-java-code-using-json/  
