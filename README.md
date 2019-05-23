@@ -27,5 +27,5 @@ The vulnerability audit log contain information from every request, such as IP o
 The stack trace log contains the stack traces when something has gone wrong in the application, this is mainly to keep the main log clean. 
 
 ## credits
-https://github.com/bbossola/vulnerability-java-samples
-https://bbossola.wordpress.com/2018/04/14/remotely-execute-java-code-using-json/
+https://github.com/bbossola/vulnerability-java-samples  
+https://bbossola.wordpress.com/2018/04/14/remotely-execute-java-code-using-json/  
