@@ -28,24 +28,6 @@ public class ProductApi {
 		}
 	}
 
-	public static String updateData(Request request, Response response) {
-    	String id = request.params(":id");
-    	String data = request.body();
-    	Object dataDeserialized = DataSerdes.deserialize(data);
-
-		if (dataDeserialized != null) {
-			Product product = products.findById(id);
-			if (product != null) {
-				product.setData(dataDeserialized);
-				Object res = products.update(id, product);
-				response.status(HTTP_CODE_ACCEPTED);
-				return DataSerdes.serialize(res);
-			}
-		}
-		response.status(HTTP_CODE_BAD_REQUEST);
-		return "Invalid content";
-	}
-
 	public static String getProducts(Request request, Response response) {
 		Collection<Product> res = products.list();
 		return ProductSerdes.serialize(res);
